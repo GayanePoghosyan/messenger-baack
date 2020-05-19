@@ -27,6 +27,11 @@ function socketConnect(server) {
             clients[data.to].emit('stream', data.img)
         }
     });
+    clients[id].on('end-video', (data) => {
+      if(clients[data.to]) {
+        clients[data.to].emit('end-stream',data.img)
+      }
+    });
 
     clients[id].on('disconnect', () => {
       delete clients[id];

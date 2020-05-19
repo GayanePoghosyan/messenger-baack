@@ -33,15 +33,29 @@ class UsersController {
 
         const users=fs.readFileSync(path.join(userFile,"users.json"));
           let token ="";
-           JSON.parse(users).map(user=>{
-          if (user.password === password && user.email===email) {
-              token = jwt.sign({ id: user.id}, JVT_SECRET);
-          }
+          const account={};
+          JSON.parse(users).map(user=>{
+              if (user.password === password && user.email===email) {
+                  token = jwt.sign({ id: user.id}, JVT_SECRET);
+                  account.id=user.id;
+                  account.name=user.first_name;
+                  account.lname=user.last_name
+              }
         });
-            res.send({
-                status: 'ok',
-                token
-            })
+          if(!_.isEmpty(account)){
+              res.send({
+                  status: 'ok',
+                  token,
+                  account
+              })
+          }
+          else{
+              res.status(422).send({
+                  status: 'failed',
+                  error:"Uncorrect username or password"
+              })
+          }
+
 
 
       } catch (e) {

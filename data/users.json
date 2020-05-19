@@ -12,5 +12,12 @@
     "last_name": "Petrosyan",
     "email": "petrosyan@mail.ru",
     "password": "123123"
-}
+},
+  {
+    "id": "3",
+    "first_name": "Aram",
+    "last_name": "Petrosyan",
+    "email": "aram@test.com",
+    "password": "123456"
+  }
 ]
